@@ -1,6 +1,7 @@
-let paragraph = document.querySelector("p");
+
 let form = document.querySelector("form");
 let inputTitle = document.getElementById("title");
+let paragraph = document.querySelector("p");
 console.log(inputTitle);
 
 function gutenbergFetcher() {
@@ -17,9 +18,18 @@ let result = response.results[0];
 return result;
 })
 .then((result) => {
-let translatorNum = result.translators.length;
-console.log(translatorNum);
-return translatorNum;
+let translators = result.translators;
+console.log(translators.length);
+if (translators.length < 1) {
+paragraph.innerText = "No translator found";
+}
+else if (translators.length > 1){
+    paragraph.innerText = "Multiple translators found";
+}
+else {
+paragraph.innerText = `The translator of this work was: ${translators[0].name} (${translators[0].birth_year}-${translators[0].death_year})`
+}
+return translators;
 })
 .catch((error) => {
 console.log(error.message)})
