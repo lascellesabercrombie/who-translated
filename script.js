@@ -8,18 +8,16 @@ function gutenbergFetcher() {
     if(!response.ok) {throw new Error ('problem calling API');}
     return response.json();
   })
-  .then((response) => {
-    if (response.translators !== []) {
-    return response.translators;
-    }
-    else{
-        console.log('no translators');
-    }
-})  
     .then((response) => {
-    console.log(response);
+    console.log(response.results[0]);
+    let result = response.results[0];
+    return result;
     })
-
+    .then((result) => {
+    let translatorNum = result.translators.length;
+    console.log(translatorNum);
+    return translatorNum;
+    })
   .catch((error) => {
     console.log(error.message)})
 }
