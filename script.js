@@ -24,7 +24,12 @@ if (translators.length < 1) {
 paragraph.innerText = "No translator found";
 }
 else if (translators.length > 1){
-    paragraph.innerText = "Multiple translators found";
+    let x = [];
+    translators.forEach((translator) => {
+        x.push(`${translator.name} (${translator.birth_year}-${translator.death_year})`)
+    })
+    x = x.join(' and ');
+    paragraph.innerText = `The translators of this work are ${x}`;
 }
 else {
 paragraph.innerText = `The translator of this work was: ${translators[0].name} (${translators[0].birth_year}-${translators[0].death_year})`
